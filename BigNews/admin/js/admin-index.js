@@ -6,7 +6,7 @@ $(function () {
     type: 'get',
     dataType: 'json',
     success: function (data) {
-      console.log(data);
+      // console.log(data);
       $('.user_info>img').attr('src', data.data.userPic);
       $('.user_center_link>img').attr('src', data.data.userPic);
       $('.user_info>span').text('欢迎  ' + data.data.nickname);
