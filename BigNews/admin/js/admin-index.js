@@ -1,8 +1,8 @@
 $(function () {
   'use strict'
-
+  // console.log(BigNew);
   $.ajax({
-    url: 'http://localhost:8080/api/v1/admin/user/info',
+    url: BigNew.user_info,
     type: 'get',
     dataType: 'json',
     success: function (data) {
