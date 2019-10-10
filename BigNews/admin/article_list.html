@@ -13,6 +13,8 @@
   <script src="./libs/jquery-1.12.4.min.js"></script>
   <!-- 引入模板引擎js文件 -->
   <script src="./libs/template-web.js"></script>
+  <!-- 分页插件 -->
+  <script src="./libs/jquery.twbsPagination.js"></script>
 </head>
 
 <body>
@@ -62,24 +64,42 @@
             <td class="text-center">2017-06-08 07:08:46</td>
             <td class="text-center">已发布</td>
             <td class="text-center">
-              <a href="article_edit.html" class="btn btn-info btn-xs">编辑</a>
+              <a href="article_edit.html" class="btn btn-default btn-xs">编辑</a>
               <a href="javascript:void(0);" class="btn btn-danger btn-xs delete">删除</a>
             </td>
           </tr>
         </tbody>
       </table>
       <div class="row text-center">
+        <ul id="pagination" class="pagination-sm"></ul>
       </div>
     </div>
   </div>
 
-  <script id="opt" type="text/html">
-    <option>所有分类</option>
-    {{ each data}}
-    <option>{{$value.name}}</option>
-    {{ /each }}
-  </script>
+  <!-- 下拉菜单模板 -->
+  <script type="text/html" id="opt">
+        <option value="">所有分类</option>
+        {{ each data }}
+        <option value="{{ $value.id }}">{{ $value.name }}</option>
+        {{ /each }}
+    </script>
 
+  <!-- 文章列表模板 -->
+  <script type="text/html" id="art_list">
+        {{ each data.data v }}
+        <tr>
+            <td>{{ v.title }}</td>
+            <td>{{ v.author }}</td>
+            <td>{{ v.category }}</td>
+            <td class="text-center">{{ v.date }}</td>
+            <td class="text-center">{{ v.state }}</td>
+            <td class="text-center">
+                <a href="article_edit.html?id={{ v.id }}" data-id="{{ v.id }}" class="btn btn-default btn-xs">编辑</a>
+                <a href="javascript:void(0);" data-id="{{ v.id }}" class="btn btn-danger btn-xs delete">删除</a>
+            </td>
+        </tr>
+        {{ /each }}
+    </script>
 
   <script src="./js/http.js"></script>
   <script src="./js/article_list.js"></script>

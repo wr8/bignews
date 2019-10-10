@@ -26,10 +26,16 @@ $(function () {
     
   })
 
-  //二级列表
-  $('.level02').click(function(){
+  // 二级列表
+  $('.level02,.level02>li').click(function(){
     $(this).addClass('active').siblings().removeClass('active');
   })
 
+  $('.logout').click(function(){
+    //2.1 删除token
+    localStorage.removeItem('token');
+    //2.2 跳转登录页
+    window.location.href = './login.html';
+ });
 
 })

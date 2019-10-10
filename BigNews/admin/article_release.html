@@ -68,5 +68,12 @@
         </div>
     </div>
 </body>
+<script id="opt" type="text/html">
+    {{each data v}}
+    <option value='{{v.id}}'>{{v.name}}</option>
+    {{/each}}
+  </script>
+  <script src="./js/http.js"></script>
+  <script src="./js/edit.js"></script>
 
 </html>
