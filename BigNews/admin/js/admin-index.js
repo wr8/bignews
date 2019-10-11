@@ -31,10 +31,9 @@ $(function () {
     $(this).addClass('active').siblings().removeClass('active');
   })
 
+  //退出登录,删除token
   $('.logout').click(function(){
-    //2.1 删除token
     localStorage.removeItem('token');
-    //2.2 跳转登录页
     window.location.href = './login.html';
  });
 

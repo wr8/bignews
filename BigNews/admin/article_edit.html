@@ -14,11 +14,11 @@
   <script src="./libs/jquery-1.12.4.min.js"></script>
   <!-- 模板引擎 -->
   <script src="./libs/template-web.js"></script>
-  <!-- jsDate日期插件 -->
-  <link type="text/css" rel="stylesheet" href="./libs/jedate/css/jeDate-test.css">
+  <!-- 日期插件 -->
   <link rel="stylesheet" href="./libs/jedate/css/jedate.css">
+  <link rel="stylesheet" href="./libs/jedate/css/jeDate-test.css">
   <script src="./libs/jedate/js/jedate.js"></script>
-  <!-- tinymce富文本编辑器插件 -->
+  <!-- 富文本 -->
   <script src="./libs/tinymce/tinymce.min.js"></script>
 </head>
 
@@ -58,12 +58,12 @@
           <label class="col-sm-2 control-label">发布时间：</label>
           <div class="col-sm-4">
             <div class="jeitem">
-              <div class="jeinpbox">
-                <input type="text" name="date" class="jeinput" id="testico" placeholder="YYYY-MM-DD">
-                <div class="icons jebtns"
-                  onclick="jeDate('#testico',{trigger:false,format: 'YYYY-MM-DD',theme: { bgcolor: '#00A680', pnColor: '#00DDAA' }})">
-                </div>
+              <!-- <div class="jeinpbox"> -->
+              <input type="text" class="jeinput" name='date' id="testico" placeholder="YYYY-MM-DD">
+              <div class="icons jebtns"
+                onclick="jeDate('#testico',{trigger:false,format: 'YYYY-MM-DD',theme: { bgcolor: '#00A680', pnColor: '#00DDAA' }})">
               </div>
+              <!-- </div> -->
             </div>
           </div>
         </div>
@@ -75,65 +75,83 @@
         </div>
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-success btn-release">发布</button>
+            <button type="submit" class="btn btn-success btn-edit">修改</button>
             <button type="submit" class="btn btn-default btn-draft">存为草稿</button>
           </div>
         </div>
       </form>
     </div>
   </div>
+</body>
+<script id="opt" type="text/html">
+  {{each data v}}
+  <option value='{{v.id}}'>{{v.name}}</option>
+  {{/each}}
+</script>
+<script src="./js/http.js"></script>
+<script src="./js/config.js"></script>
+<script>
+  $(function () {
+    'use strict'
 
-  <!-- 准备一个 文章分类 模板 -->
-  <script id="opt" type="text/html">
-        {{each data v}}
-        <option value='{{v.id}}'>{{v.name}}</option>
-        {{/each}}
-    </script>
+    let id = window.location.href.split('=')[1];
+    $.ajax({
+      type: 'get',
+      url: BigNew.article_search,
+      data: {
+        id: id
+      },
+      success: function (backData) {
+        console.log(backData);
+        if (backData.code == 200) {
+          $('input.title').val(backData.data.title); //文章标题
+          $('.article_cover').attr('src', backData.data.cover); //文章封面
+          $('select.category').val(backData.data.categoryId); //文章类别
+          $('#testico').val(backData.data.date); //时间.
+          setTimeout(function () {
+            tinymce.activeEditor.setContent(backData.data.content)
+          }, 2000);
 
-  <script src="./js/http.js"></script>
-  <script src="./js/config.js"></script>
-  <script>
-
-    $(function () {
-      'use strict'
-
-      $('.btn-release').click(function (e) {
-        e.preventDefault();
-        releaseArticle('已发布');
-      });
-
-      $('.btn-draft').click(function (e) {
-        e.preventDefault();
-        releaseArticle('草稿');
-      });
-
-      function releaseArticle(state) {
-        let fd = new FormData($('#form')[0]);
-        fd.append('content', tinyMCE.activeEditor.getContent());
-        fd.append('state', state);
-        $.ajax({
-          url: BigNew.article_publish,
-          type: 'post',
-          dataType: 'json',
-          data: fd,
-          contentType: false,
-          processData: false,
-          success: function (backData) {
-            if (backData.code == 200) {
-              alert('添加成功');
-              $('.level02>li:eq(0)', window.parent.document)
-                .addClass('active')
-                .siblings()
-                .removeClass('active');
-              window.history.back();
-            } else {
-              alert(backData.msg);
-            }
-          }
-        });
+        }
       }
     });
-  </script>
-</body>
+
+    $('.btn-edit').click(function (e) {
+      e.preventDefault();
+      editArticlie('已发布');
+    });
+
+    $('.btn-draft').click(function (e) {
+      e.preventDefault();
+      editArticlie('草稿');
+    });
+
+    function editArticlie(state) {
+      let fd = new FormData($('#form')[0]);
+      fd.append('content', tinyMCE.activeEditor.getContent());
+      fd.append('id', id);
+      //追加文章状态
+      fd.append('state', state);
+      //3.发送ajax请求,完成修改
+      $.ajax({
+        url: BigNew.article_edit,
+        type: 'post',
+        dataType: 'json',
+        data: fd,
+        contentType: false,
+        processData: false,
+        success: function (backData) {
+          if (backData.code == 200) {
+            alert('修改成功!');
+            //回退上一页
+            window.history.back();
+          } else {
+            alert(backData.msg);
+          }
+        }
+      });
+    }
+  });
+</script>
 
 </html>
