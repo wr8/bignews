@@ -30,6 +30,7 @@
     index_hotpic: baseURL + "/index/hotpic",//获取焦点图
     index_category: baseURL + "/index/category",//获取文章类型
     index_latest: baseURL + "/index/latest",//获取最新资讯
+    index_latest_comment: baseURL + "/index/latest_comment",//获取最新评论
     index_rank: baseURL + "/index/rank",//获取热门排行
     index_attention: baseURL + "/index/attention",//获取焦点评论
     index_artitle: baseURL + "/index/artitle",//获取文章详情

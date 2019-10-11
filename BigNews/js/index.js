@@ -15,9 +15,10 @@ $(function () {
   $.ajax({
     type: 'get',
     url: BigNew.category_list,
+    dataType: 'json',
     success: function (backData) {
-      console.log(backData);
-      $('.level_two').html(template('cat_list', backData));
+      // console.log(backData);
+      $('.level_two,.left_menu').html(template('cat_list', backData));
     }
   });
 
@@ -27,7 +28,8 @@ $(function () {
     type: 'get',
     dataType: 'json',
     success: function (backData) {
-      console.log(backData);
+      // console.log("新闻列表");
+      // console.log(backData);
       $('.common_news').html(template('news', backData));
     }
   });
@@ -38,18 +40,18 @@ $(function () {
     type: 'get',
     dataType: 'json',
     success: function (backData) {
-      console.log(backData);
+      // console.log(backData);
       $('.hotrank_list').html(template('rank', backData));
     }
   });
 
   //最新评论
   $.ajax({
-    url: BigNew.get_comment,
+    url: BigNew.index_latest_comment,
     type: 'get',
     dataType: 'json',
     success: function (backData) {
-      console.log(backData);
+      // console.log(backData);
       $('.comment_list').html(template('comment', backData));
     }
   });
