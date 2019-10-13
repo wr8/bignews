@@ -2,7 +2,6 @@
 不需要使用： 这个js只需要导入一次   前端三层js
 需要使用： 这个js需要多次导入  http.js 网络请求层
 */
-
 /* 沙箱模式 */
 (function (w) {
   var baseURL = 'http://localhost:8080/api/v1'
@@ -33,7 +32,7 @@
     index_latest_comment: baseURL + "/index/latest_comment",//获取最新评论
     index_rank: baseURL + "/index/rank",//获取热门排行
     index_attention: baseURL + "/index/attention",//获取焦点评论
-    index_artitle: baseURL + "/index/artitle",//获取文章详情
+    index_article: baseURL + "/index/article",//获取文章详情
     index_get_comment: baseURL + "/index/get_comment",//获取评论列表
     index_post_comment: baseURL + "/index/post_comment",//发表评论列表
     index_search: baseURL + "/index/search",//获取文章搜索

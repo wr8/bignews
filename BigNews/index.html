@@ -227,6 +227,8 @@
     <p>CopyRight © 2019 深圳大事件信息技术股份有限公司 All Rights Reserved</p>
     <p>电话：0755-****888 粤ICP备*******8号</p>
   </div>
+
+
   <!-- 焦点新闻 -->
   <script id="focus_news" type="text/html">
     {{each data}}
@@ -266,8 +268,8 @@
 
   <!-- 热门排行 -->
   <script id="rank" type="text/html">
-      {{ each data v}}
-      <li><span class="first">1</span><a href="./article.html?id={{ v.id }}">{{ v.title }}</a></li>
+      {{ each data}}
+      <li><span class="{{if $index == 0}}first{{else if $index == 1}}second{{else if $index == 2}}third{{/if}}">{{$index+1}}</span><a href="./article.html?id={{ $value.id }}">{{@ $value.title }}</a></li>
       {{ /each }}
   </script>
 
@@ -296,6 +298,7 @@
   <!-- 引入jq文件 -->
   <script src="./js/jquery-1.12.4.min.js"></script>
   <script src="./admin/js/http.js"></script>
+  <script src="./js/req.js"></script>
   <script src="./js/index.js"></script>
 </body>
 

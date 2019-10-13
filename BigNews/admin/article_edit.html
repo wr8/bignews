@@ -130,9 +130,7 @@
       let fd = new FormData($('#form')[0]);
       fd.append('content', tinyMCE.activeEditor.getContent());
       fd.append('id', id);
-      //追加文章状态
       fd.append('state', state);
-      //3.发送ajax请求,完成修改
       $.ajax({
         url: BigNew.article_edit,
         type: 'post',
