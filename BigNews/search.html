@@ -20,7 +20,7 @@
     <a href="#" class="logo fl"><img src="./images/logo.png" alt="logo"></a>
     <div class="search_form fl">
       <input type="text" class="search_txt" placeholder="黑洞照片">
-      <button class="search_btn search_button"><i class="fa fa-search"></i></button>
+      <button class="search_btn"><i class="fa fa-search"></i></button>
     </div>
     <div class="link_info fr">
       <a href="#"><i class="fa fa-angle-right"></i>&nbsp;&nbsp;网站地图</a><br>
@@ -270,25 +270,9 @@
   {{ /each }}
 </script>
 
-<!-- 新闻列表模板 -->
-<!-- <script id="news" type="text/html">
-  {{ each data.data v }}
-  <div class="common_news_list">
-      <a href="#" class="list_pic"><img src="{{ v.cover }}" alt=""></a>
-      <h4><a href="./article.html?id={{ v.id }}">{{ v.title }}</a></h4>
-      <p>{{@ v.content }}</p>
-      <div class="new_info">
-          <span>标签：{{ v.category }}&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<i class="fa fa-eye"></i>&nbsp;阅读( {{ v.read }}
-              )&nbsp;&nbsp;&nbsp;<i class="fa fa-commenting"></i>&nbsp;评论( {{ v.comments }} )</span>
-          <b>{{ v.date }}</b>
-      </div>
-  </div>
-  {{ /each }}
-</script> -->
-
   <script src="./admin/js/http.js"></script>
   <script src="./js/req.js"></script>
-  <script src="./js/list.js"></script>
+  <script src="./js/seach.js"></script>
   <!-- <script>
     //入口函数
     $(function () {

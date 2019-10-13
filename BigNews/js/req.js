@@ -29,7 +29,7 @@ $(function() {
     type: 'get',
     dataType: 'json',
     success: function (backData) {
-      // console.log(backData);
+      console.log(backData);
       $('.comment_list').html(template('comment_Now', backData));
     }
   });
@@ -44,4 +44,9 @@ $(function() {
       $('.guanzhu_list').html(template('guanzhu', backData));
     }
   });
+
+  $('.search_button').click(function () {
+    var text = $('.search_txt').val();
+    location.href='./search.html?search='+text;
+  })
 })
